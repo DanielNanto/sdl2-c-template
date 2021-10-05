@@ -4,6 +4,6 @@
 #include <stdbool.h>
 #include <SDL_image.h>
 
-SDL_Texture * loadTexture();
+SDL_Texture * JDL_image_to_texture();
     
 #endif

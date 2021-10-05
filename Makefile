@@ -8,6 +8,7 @@ TARGET = joonko-sdl2-template
 
 SOURCES = \
 	src/global.c \
+	src/jdl_image.c \
 	src/main.c
 
 BUILDIR = build

@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include "global.h"
+#include "jdl_image.h"
 
 int main(int argc, char ** argv)
 {
@@ -37,6 +38,13 @@ int main(int argc, char ** argv)
     SDL_GetWindowSize(window, &background.w, &background.h);
     SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
     SDL_RenderFillRect(renderer, &background);
+    
+    SDL_Texture * texture_one = JDL_image_to_texture("data/1.png",renderer);
+    SDL_Texture * texture_two = JDL_image_to_texture("data/2.tif",renderer);
+    SDL_Texture * texture_three = JDL_image_to_texture("data/3.jpeg",renderer);
+    SDL_Texture * texture_four = JDL_image_to_texture("data/4.gif",renderer);
+    SDL_RenderCopy(renderer, texture_four, NULL, &background);
+    
     
     //BEGIN MAIN LOOP
     while (live == true){
