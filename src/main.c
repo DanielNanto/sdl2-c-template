@@ -16,11 +16,18 @@ int main(int argc, char ** argv)
     
     // Initialize
     SDL_Init(SDL_INIT_VIDEO | SDL_INIT_AUDIO);
-    SDL_Window * window = SDL_CreateWindow("SDL2-Template", SDL_WINDOWPOS_UNDEFINED, SDL_WINDOWPOS_UNDEFINED, 640, 480, SDL_WINDOW_RESIZABLE);
+    SDL_Window * window = SDL_CreateWindow("SDL2-Template", 
+                                           SDL_WINDOWPOS_UNDEFINED, 
+                                           SDL_WINDOWPOS_UNDEFINED, 
+                                           640, 
+                                           480,
+                                           SDL_WINDOW_RESIZABLE);
     if(!window){
         fprintf(stderr, "SDL_CreateWindow failed. SDL Error: %s\n", SDL_GetError());
     }
-    SDL_Renderer * renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED|SDL_RENDERER_TARGETTEXTURE);
+    SDL_Renderer * renderer = SDL_CreateRenderer(window, 
+                                                 -1, 
+                                                 SDL_RENDERER_ACCELERATED|SDL_RENDERER_TARGETTEXTURE);
     if(!renderer){
         fprintf(stderr, "SDL_CreateRenderer failed. SDL Error: %s\n", SDL_GetError());
     }
@@ -39,12 +46,11 @@ int main(int argc, char ** argv)
     SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
     SDL_RenderFillRect(renderer, &background);
     
-    SDL_Texture * texture_one = JDL_image_to_texture("data/1.png",renderer);
-    SDL_Texture * texture_two = JDL_image_to_texture("data/2.tif",renderer);
-    SDL_Texture * texture_three = JDL_image_to_texture("data/3.jpeg",renderer);
-    SDL_Texture * texture_four = JDL_image_to_texture("data/4.gif",renderer);
+    SDL_Texture * texture_one = jdl_img_to_texture("data/1.png",renderer);
+    SDL_Texture * texture_two = jdl_img_to_texture("data/2.tif",renderer);
+    SDL_Texture * texture_three = jdl_img_to_texture("data/3.jpeg",renderer);
+    SDL_Texture * texture_four = jdl_img_to_texture("data/4.gif",renderer);
     SDL_RenderCopy(renderer, texture_four, NULL, &background);
-    
     
     //BEGIN MAIN LOOP
     while (live == true){

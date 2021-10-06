@@ -1,9 +1,8 @@
-#ifndef SOJOLEVEL
-#define SOJOLEVEL
+#ifndef JDLIMAGE
+#define JDLIMAGE
 #include <SDL.h>
-#include <stdbool.h>
 #include <SDL_image.h>
 
-SDL_Texture * JDL_image_to_texture();
+SDL_Texture* jdl_img_to_texture();
     
 #endif
