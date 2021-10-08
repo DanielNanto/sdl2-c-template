@@ -1,7 +1,7 @@
-// Title:    jdl-template
+// Title:    joonko-sdl2-template
 // Author:   Jun
 // Company:  Joonko Art
-// Date:     2021.10.08 (ISO 8601)
+// Date:     2021.10.07 (ISO 8601)
 // Standard: JSF-AV C++ 
 
 #include <SDL.h>
