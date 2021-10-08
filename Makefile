@@ -7,8 +7,7 @@ LFLAGS = `pkg-config --libs $(PKGCONFIG_LIBS)`
 TARGET = joonko-sdl2-template
 
 SOURCES = \
-	src/global.c \
-	src/jdl_image.c \
+	src/jdl_global.c \
 	src/main.c
 
 BUILDIR = build
@@ -23,7 +22,7 @@ $(TARGET): $(OBJECTS)
 $(BUILDIR)/%.o: %.c
 	@echo " CC " $<
 	@mkdir -p $(dir $@)
-	@$(CC) -o $@ -c $< $(CFLAGS)
+	@$(CC) -o $@ -c $< $(CFLAGS) -Isrc
 
 $(BUILDIR)/%.o: %.cpp
 	@echo " CC " $@
