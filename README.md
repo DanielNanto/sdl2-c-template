@@ -8,4 +8,3 @@ This is an extremely basic sdl template. Included is a Makefile derived from pre
 <br />
 This repository is only meant for personal use.
  
- 
