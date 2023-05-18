@@ -9,7 +9,7 @@
 #include <SDL_mixer.h>
 #include <stdio.h>
 #include <stdbool.h>
-#include <jdl_global.h>
+// #include <jdl_global.h>
 
 int main(int argc, char ** argv)
 {
@@ -51,7 +51,7 @@ int main(int argc, char ** argv)
   
   //BEGIN MAIN LOOP
   while (live == true){
-    time_current = SDL_GetTicks();
+    // time_current = SDL_GetTicks();
     // Handling SDL_Events:
     SDL_Event mainEvent;
     while(SDL_PollEvent(&mainEvent)){
