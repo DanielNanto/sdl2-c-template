@@ -4,20 +4,15 @@
 // Date:     2023.05.21 (ISO 8601)
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
-   //define something for Windows (32-bit and 64-bit, this part is common)
    #ifdef _WIN64
       #include <SDL2/SDL.h>
       #include <SDL2/SDL_image.h>
       #include <SDL2/SDL_mixer.h>
-      //define something for Windows (64-bit only)
-   #else
-      //define something for Windows (32-bit only)
    #endif
 #elif __linux__
   #include <SDL.h>
   #include <SDL_image.h>
   #include <SDL_mixer.h>
-// #endif
 #elif __APPLE__
   #include <SDL2/SDL.h>
   #include <SDL2/SDL_image.h>
