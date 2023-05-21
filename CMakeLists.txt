@@ -4,6 +4,11 @@ project(sdl-cmake)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x")
 
+# If on windows, run as a desktop application, not a console application.
+if (WIN32)
+	set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mwindows")
+endif (WIN32)
+
 add_executable(${PROJECT_NAME} src/main.c)
 
 INCLUDE(FindPkgConfig)
