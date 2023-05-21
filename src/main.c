@@ -4,9 +4,25 @@
 // Date:     2021.10.07 (ISO 8601)
 // Standard: JSF-AV C++ 
 
-#include <SDL.h>
-#include <SDL_image.h>
-#include <SDL_mixer.h>
+#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
+   //define something for Windows (32-bit and 64-bit, this part is common)
+   #ifdef _WIN64
+      #include <SDL2/SDL.h>
+      #include <SDL2/SDL_image.h>
+      #include <SDL2/SDL_mixer.h>
+      //define something for Windows (64-bit only)
+   #else
+      //define something for Windows (32-bit only)
+   #endif
+#elif __linux__
+  #include <SDL.h>
+  #include <SDL_image.h>
+  #include <SDL_mixer.h>
+#endif
+
+// #include <SDL.h>
+// #include <SDL_image.h>
+// #include <SDL_mixer.h>
 #include <stdio.h>
 #include <stdbool.h>
 // #include <jdl_global.h>
