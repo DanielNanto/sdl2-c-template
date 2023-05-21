@@ -1,8 +1,7 @@
-// Title:    joonko-sdl2-template
-// Author:   Jun
-// Company:  Joonko Art
-// Date:     2021.10.07 (ISO 8601)
-// Standard: JSF-AV C++ 
+// Title:    template-sdl2
+// Author:   Dan
+// Website:  https://www.danielnanto.com
+// Date:     2023.05.21 (ISO 8601)
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
    //define something for Windows (32-bit and 64-bit, this part is common)
@@ -18,14 +17,15 @@
   #include <SDL.h>
   #include <SDL_image.h>
   #include <SDL_mixer.h>
+// #endif
+#elif __APPLE__
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_image.h>
+  #include <SDL2/SDL_mixer.h>
 #endif
 
-// #include <SDL.h>
-// #include <SDL_image.h>
-// #include <SDL_mixer.h>
 #include <stdio.h>
 #include <stdbool.h>
-// #include <jdl_global.h>
 
 int main(int argc, char ** argv)
 {
