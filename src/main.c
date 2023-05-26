@@ -1,7 +1,5 @@
-// Title:    template-sdl2
-// Author:   Dan
-// Website:  https://www.danielnanto.com
-// Date:     2023.05.21 (ISO 8601)
+#include <stdio.h>
+#include <stdbool.h>
 
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
    #ifdef _WIN64
@@ -18,9 +16,6 @@
   #include <SDL2/SDL_image.h>
   #include <SDL2/SDL_mixer.h>
 #endif
-
-#include <stdio.h>
-#include <stdbool.h>
 
 int main(int argc, char ** argv)
 {
