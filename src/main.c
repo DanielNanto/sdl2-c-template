@@ -19,11 +19,6 @@
   #include <SDL2/SDL_mixer.h>
 #endif
 
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
-#include <math.h>
-
 int main(int argc, char ** argv)
 {
   // Suppress compiler warnings:
