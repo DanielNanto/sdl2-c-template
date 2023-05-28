@@ -70,7 +70,7 @@ int main(int argc, char ** argv)
   SDL_SetRenderDrawColor(renderer, 0xff, 0xff, 0xff, 0xff);
   SDL_RenderFillRect(renderer, &background);
   
-  //BEGIN MAIN LOOP
+  // Begin main loop:
   while (live == true)
   {
     time_new = SDL_GetTicks();
