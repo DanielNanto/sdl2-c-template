@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8)
 
-project(sdl-cmake-template)
+project(sdl-template)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -Wextra")
 if(WIN32)
@@ -14,7 +14,8 @@ if (MSVC)
   set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /W4")
 endif()
 
-add_executable(${PROJECT_NAME} src/main.c)
+add_executable(${PROJECT_NAME})
+add_subdirectory(src)
 
 INCLUDE(FindPkgConfig)
 PKG_SEARCH_MODULE(SDL2 REQUIRED sdl2)
