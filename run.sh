@@ -1,1 +1,5 @@
-clear && make && ./joonko-sdl2-template
+rm-rf ./build
+mkdir build
+cmake -B./build -H./ && 
+make -C ./build &&
+./build/sdl-template
