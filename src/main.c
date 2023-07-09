@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdbool.h>
-#include <stdint.h>
-
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
    #ifdef _WIN64
       #include <SDL2/SDL.h>
@@ -17,6 +13,11 @@
   #include <SDL2/SDL_image.h>
   #include <SDL2/SDL_mixer.h>
 #endif
+
+#include <stdio.h>
+#include <stdbool.h>
+
+#include "../include/settings.h"
 
 int main(int argc, char ** argv)
 {
@@ -59,13 +60,7 @@ int main(int argc, char ** argv)
     printf("IMG_Init failed. SDL_IMG Error: %s\n", IMG_GetError() );
   }
 
-  // Run-time variables:
-  bool live = true;
-  int target_fps = 120;
-  uint32_t time_new = 0;
-  uint32_t time_old = 0;
-  uint32_t time_delay = 1000 / target_fps; // x = 1000ms / target_fps
-  // Draw initial state:
+  // Placeholder SDL items:
   SDL_Rect background = 
   {
     .x = 0,
@@ -83,13 +78,9 @@ int main(int argc, char ** argv)
   SDL_GetWindowSize(window, 
                     &background.w, 
                     &background.h);
-  SDL_SetRenderDrawColor(renderer, 
-                          bg_color.r, 
-                          bg_color.g, 
-                          bg_color.b, 
-                          bg_color.a);
-  SDL_RenderFillRect(renderer, &background);
   
+  // Run-time variables:
+  bool live = true;
   // Begin main loop:
   while (live == true)
   {
