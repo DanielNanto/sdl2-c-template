@@ -3,9 +3,10 @@ cmake_minimum_required(VERSION 2.8)
 project(sdl-template)
 
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -Wextra")
-if(WIN32)
-  set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mwindows") 
-endif()
+# if(WIN32)
+  # set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mwindows") 
+  set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -mwindows") 
+# endif()
 # if (CMAKE_COMPILER_IS_GNUCC) // CMAKE_C_COMPILER_ID 
 if (CMAKE_C_COMPILER_ID STREQUAL "GNU")
   set(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} -Wall -Wextra")
