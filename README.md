@@ -1,5 +1,5 @@
 # sdl2-template
 <br />
-This is an extremely basic SDL2 template using Cmake.
+This is a basic SDL2 template using Cmake.
 <br />
  
