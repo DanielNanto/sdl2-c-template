@@ -1,5 +1,5 @@
-# cmake_minimum_required(VERSION 2.8)
-cmake_minimum_required(VERSION 3.27.7)
+cmake_minimum_required(VERSION 2.8)
+# cmake_minimum_required(VERSION 3.27.7)
 
 project(sdl2-c-template)
 
@@ -45,3 +45,6 @@ TARGET_LINK_LIBRARIES(
   ${SDL2_LIBRARIES}
   ${SDL2IMAGE_LIBRARIES} 
   ${SDL2MIXER_LIBRARIES})
+
+# Lowered the minimum required version of CMake to 2.8. Check darwin 
+# compatibility.
