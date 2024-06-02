@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/usr/bin/env bash
 # LINUX
-if [ "$OSTYPE" == "linux-gnu"* ]; then
+if [[ $OSTYPE == "linux-gnu"* ]]; then
   clear &&
   echo '[o] Linux detected.' &&
   echo '[o] CMake:' &&
@@ -10,7 +10,7 @@ if [ "$OSTYPE" == "linux-gnu"* ]; then
   echo 'Launching program:' &&
   ./build/sdl2-c-template
 # WINDOWS
-elif [ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "win32" ]; then
+elif [[ $OSTYPE == "msys" ]] || [[ $OSTYPE == "win32" ]]; then
   clear &&
   echo '[o] Windows detected.' &&
   echo '[o] CMake:' &&
@@ -20,7 +20,7 @@ elif [ "$OSTYPE" == "msys" ] || [ "$OSTYPE" == "win32" ]; then
   echo '[o] Launching program:' &&
   ./build/sdl2-c-template.exe
 # MACOS
-elif [[ "$OSTYPE" == "darwin"* ]]; then
+elif [[ $OSTYPE == "darwin"* ]]; then
   clear &&
   echo '[o] MacOS detected.' &&
   echo '[o] CMake:' &&
@@ -30,3 +30,6 @@ elif [[ "$OSTYPE" == "darwin"* ]]; then
   echo 'Launching program:' &&
   ./build/Release/sdl2-c-template
 fi
+
+# Changed #!/bin/sh to #!/usr/bin/env bash
+# Removed "" from $OSTYPE
