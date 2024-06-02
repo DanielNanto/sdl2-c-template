@@ -5,7 +5,7 @@ project(sdl2-c-template)
 
 # set(CMAKE_CXX_STANDARD 17)
 # set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++0x -Wall -Wextra")
-set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c++0x -Wall -Wextra")
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -Wall -Wextra")
 if(WIN32)
   set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -mwindows") 
   # set(CMAKE_CXX_FLAGS "${CMAKE_C_FLAGS} -mwindows") 
