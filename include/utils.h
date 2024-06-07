@@ -1,10 +1,8 @@
-#ifndef SDL_CMAKE_TEMPLATE_H
-#define SDL_CMAKE_TEMPLATE_H
+#ifndef SDLCT_UTILS_H
+#define SDLCT_UTILS_H
 
 #include <stdint.h>
 
-extern uint32_t time_new;
-extern uint32_t time_old;
-extern uint32_t time_delay;
+extern uint32_t unsigned_delta(uint32_t value_a, uint32_t value_b);
 
-#endif // SDL_CMAKE_TEMPLATE_H
+#endif // SDLCT_UTILS_H

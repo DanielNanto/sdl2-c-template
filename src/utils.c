@@ -1,5 +1,11 @@
-#include "../include/settings.h"
+#include "../include/utils.h"
 
-uint32_t time_new = 0;
-uint32_t time_old = 0;
-uint32_t time_delay = 1000 / 120; // x = 1000ms / target_fps
+/// \brief Find the unsigned delta of two uint32_t values.
+/// \param value_a One of the uint32_t values to be evaluated.
+/// \param value_b The other uint32_t value to be evaluated.
+/// \returns The unsigned delta of the two uint32_t values.
+uint32_t unsigned_delta(uint32_t value_a, uint32_t value_b)
+{
+  uint32_t delta = (value_a > value_b) ? value_a - value_b : value_b - value_a;
+  return delta;
+}
