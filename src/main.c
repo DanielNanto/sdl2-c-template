@@ -27,37 +27,37 @@ int main(int argc, char ** argv)
   (void)argv;
   
   // Initialize SDL:
-  SDL_Init(SDL_INIT_EVERYTHING); // SDL_INIT_VIDEO | SDL_INIT_AUDIO
-  SDL_Window * window = SDL_CreateWindow("SDL2-Template", 
-                                          SDL_WINDOWPOS_CENTERED, 
-                                          SDL_WINDOWPOS_CENTERED, 
-                                          640, 
-                                          480,
-                                          SDL_WINDOW_RESIZABLE);
+  SDL_Init(SDL_INIT_EVERYTHING);
+  SDL_Window* window = SDL_CreateWindow("sdl2-c-template",
+                                         SDL_WINDOWPOS_CENTERED,
+                                         SDL_WINDOWPOS_CENTERED,
+                                         640,
+                                         480,
+                                         SDL_WINDOW_RESIZABLE);
   if (!window)
   {
-    ++errors;
     printf("SDL_CreateWindow failed. SDL Error: %s\n", SDL_GetError());
+    ++errors;
   }
-  SDL_Renderer * renderer = SDL_CreateRenderer(window, 
+  SDL_Renderer* renderer = SDL_CreateRenderer(window, 
                                                -1, 
                                                SDL_RENDERER_ACCELERATED | 
                                                SDL_RENDERER_TARGETTEXTURE);
   if (!renderer)
   {
-    ++errors;
     printf("SDL_CreateRenderer failed. SDL Error: %s\n", SDL_GetError());
+    ++errors;
   }
   if (Mix_OpenAudio(44100, MIX_DEFAULT_FORMAT, 2, 2048) < 0) 
   {
-    ++errors;
     printf("Mix_OpenAudio failed. SDL_mixer Error: %s\n", Mix_GetError());
+    ++errors;
   }
   int imgFlags = IMG_INIT_PNG;
   if (!(IMG_Init(imgFlags) & imgFlags))
   {
+    printf("IMG_Init failed. SDL_IMG Error: %s\n", IMG_GetError());
     ++errors;
-    printf("IMG_Init failed. SDL_IMG Error: %s\n", IMG_GetError() );
   }
 
   // Placeholder SDL items:
@@ -75,8 +75,8 @@ int main(int argc, char ** argv)
     .b = 0xDA, 
     .a = 0xFF
   };
-  SDL_GetWindowSize(window, 
-                    &background.w, 
+  SDL_GetWindowSize(window,
+                    &background.w,
                     &background.h);
   
   // Run-time variables:
