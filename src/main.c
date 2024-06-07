@@ -1,9 +1,7 @@
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__)
-   #ifdef _WIN64
-      #include <SDL2/SDL.h>
-      #include <SDL2/SDL_image.h>
-      #include <SDL2/SDL_mixer.h>
-   #endif
+#if _WIN64 || _WIN32
+  #include <SDL2/SDL.h>
+  #include <SDL2/SDL_image.h>
+  #include <SDL2/SDL_mixer.h>
 #elif __linux__
   #include <SDL.h>
   #include <SDL_image.h>
@@ -15,11 +13,11 @@
 #endif
 
 #include <stdio.h>
+#include <stdint.h>
 #include <stdbool.h>
+#include "../include/utils.h"
 
-#include "../include/settings.h"
-
-int main(int argc, char ** argv)
+int main(int argc, char** argv)
 {
   int errors = 0;
   // Suppress compiler warnings:
@@ -28,22 +26,22 @@ int main(int argc, char ** argv)
   
   // Initialize SDL:
   SDL_Init(SDL_INIT_EVERYTHING);
-  SDL_Window* window = SDL_CreateWindow("sdl2-c-template",
+  SDL_Window* Window = SDL_CreateWindow("sdl2-c-template",
                                          SDL_WINDOWPOS_CENTERED,
                                          SDL_WINDOWPOS_CENTERED,
                                          640,
                                          480,
                                          SDL_WINDOW_RESIZABLE);
-  if (!window)
+  if (!Window)
   {
     printf("SDL_CreateWindow failed. SDL Error: %s\n", SDL_GetError());
     ++errors;
   }
-  SDL_Renderer* renderer = SDL_CreateRenderer(window, 
-                                               -1, 
-                                               SDL_RENDERER_ACCELERATED | 
-                                               SDL_RENDERER_TARGETTEXTURE);
-  if (!renderer)
+  SDL_Renderer* Renderer = SDL_CreateRenderer(Window, 
+                                              -1, 
+                                              SDL_RENDERER_ACCELERATED | 
+                                              SDL_RENDERER_TARGETTEXTURE);
+  if (!Renderer)
   {
     printf("SDL_CreateRenderer failed. SDL Error: %s\n", SDL_GetError());
     ++errors;
@@ -60,41 +58,31 @@ int main(int argc, char ** argv)
     ++errors;
   }
 
-  // Placeholder SDL items:
-  SDL_Rect background = 
-  {
-    .x = 0,
-    .y = 0,
-    .w = 0,
-    .h = 0
-  };
-  SDL_Color bg_color = 
-  {
-    .r = 0xDA, 
-    .g = 0xDA, 
-    .b = 0xDA, 
-    .a = 0xFF
-  };
-  SDL_GetWindowSize(window,
+  // Various default variables:
+  SDL_Color bg_color = {0xDA, 0xDA, 0xDA, 0xFF}; // RGBA
+  SDL_Rect background = {0, 0, 0, 0}; // X Y W H
+  SDL_GetWindowSize(Window,
                     &background.w,
                     &background.h);
-  
-  // Run-time variables:
-  bool live = true;
-  // Begin main loop:
+  uint32_t runtime_ms = 0;
+  uint32_t time_last_rendered = 0;
+  uint32_t fps_target = 120;
+  uint32_t render_delay_ms = 1000 / fps_target;
+  bool live = (errors == 0) ? true : false;
+  // Main loop:
   while (live == true)
   {
-    time_new = SDL_GetTicks();
-    if (time_new - time_old > time_delay)
+    runtime_ms = SDL_GetTicks();
+    if (unsigned_delta(runtime_ms, time_last_rendered) > render_delay_ms)
     {
-      SDL_SetRenderDrawColor(renderer, 
+      SDL_SetRenderDrawColor(Renderer, 
                               bg_color.r, 
                               bg_color.g, 
                               bg_color.b, 
                               bg_color.a);
-      SDL_RenderFillRect(renderer, &background);
-      SDL_RenderPresent(renderer);
-      time_old = time_new;
+      SDL_RenderFillRect(Renderer, &background);
+      SDL_RenderPresent(Renderer);
+      time_last_rendered = runtime_ms;
     }
     // Default events:
     SDL_Event Event;
@@ -104,19 +92,20 @@ int main(int argc, char ** argv)
       if (Event.type == SDL_QUIT ||
           (Event.type == SDL_KEYDOWN && Event.key.keysym.sym == SDLK_ESCAPE))
       {
+        printf("Exiting...\n");
         live = 0;
       }
       // Default resize behavior:
       else if (Event.type == SDL_WINDOWEVENT && 
                Event.window.event == SDL_WINDOWEVENT_RESIZED)
       {
-        SDL_GetWindowSize(window, &background.w, &background.h);
+        SDL_GetWindowSize(Window, &background.w, &background.h);
       }
     }
   }
   // Memory clean-up upon exit:
-  SDL_DestroyRenderer(renderer);
-  SDL_DestroyWindow(window);
+  SDL_DestroyRenderer(Renderer);
+  SDL_DestroyWindow(Window);
   SDL_Quit();
   return errors;
 }
