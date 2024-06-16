@@ -12,21 +12,33 @@ if [[ $OSTYPE == "linux-gnu"* ]]; then
   ./build/sdl2-c-template
 # WINDOWS
 elif [[ $OSTYPE == "msys" ]] || [[ $OSTYPE == "win32" ]]; then
-  clear &&
-  echo '[o] Windows detected.' &&
-  echo '[o] CMake:' &&
-  cmake -B./build -H./ &&
-  echo '[o] Ninja:' &&
-  ninja -C ./build &&
-  echo '[o] Copying DLLs:' &&
-  cp dlls/* build/ && 
-  echo '[o] Creating a shortcut in the project directory:' &&
+  clear
+  echo '[o] Windows detected.'
+  echo '[o] CMake:'
+  cmake -B./build -H./
+  if [[ $? -ne 0 ]]; then
+    echo '[x] Cmake failed.'
+    exit 1
+  fi
+  echo '[o] Ninja:'
+  ninja -C ./build 
+  if [[ $? -ne 0 ]]; then
+    echo '[x] Build failed.'
+    exit 1
+  fi
+  echo '[o] Copying DLLs:'
+  cp dlls/* build/
+  if [[ $? -ne 0 ]]; then
+    echo '[x] Could not copy DLLs into the build folder.'
+    exit 1
+  fi
+  echo '[o] Creating a shortcut in the project directory:'
   powershell '
     $WshShell = New-Object -comObject WScript.Shell
     $Shortcut = $WshShell.CreateShortcut("sdl2-c-template.lnk")
     $Shortcut.TargetPath = (Resolve-Path "build\sdl2-c-template.exe").Path
     $Shortcut.Save() '
-  echo '[o] Launching program:' &&
+  echo '[o] Launching program:'
   ./build/sdl2-c-template.exe
 # MACOS
 elif [[ $OSTYPE == "darwin"* ]]; then
