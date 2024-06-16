@@ -25,13 +25,18 @@ int main(int argc, char** argv)
   (void)argv;
   
   // Initialize SDL:
-  SDL_Init(SDL_INIT_EVERYTHING);
+  errors = SDL_Init(SDL_INIT_EVERYTHING);
+  if (errors != 0)
+  {
+    printf("SDL_Init failed. SDL Error: %s\n", SDL_GetError());
+    ++errors;
+  }
   SDL_Window* Window = SDL_CreateWindow("sdl2-c-template",
-                                         SDL_WINDOWPOS_CENTERED,
-                                         SDL_WINDOWPOS_CENTERED,
-                                         640,
-                                         480,
-                                         SDL_WINDOW_RESIZABLE);
+                                        SDL_WINDOWPOS_CENTERED,
+                                        SDL_WINDOWPOS_CENTERED,
+                                        640,
+                                        480,
+                                        SDL_WINDOW_RESIZABLE);
   if (!Window)
   {
     printf("SDL_CreateWindow failed. SDL Error: %s\n", SDL_GetError());
@@ -58,48 +63,49 @@ int main(int argc, char** argv)
     ++errors;
   }
 
-  // Various default variables:
-  SDL_Color bg_color = {0xDA, 0xDA, 0xDA, 0xFF}; // RGBA
-  SDL_Rect background = {0, 0, 0, 0}; // X Y W H
+  // Various example variables:
+  SDL_Color Background_color = {0xDA, 0xDA, 0xDA, 0xFF}; // RGBA
+  SDL_Rect Background = {0, 0, 0, 0}; // X Y W H
   SDL_GetWindowSize(Window,
-                    &background.w,
-                    &background.h);
-  uint32_t runtime_ms = 0;
-  uint32_t time_last_rendered = 0;
-  uint32_t fps_target = 120;
-  uint32_t render_delay_ms = 1000 / fps_target;
+                    &Background.w,
+                    &Background.h);
+  uint32_t time_last_rendered = SDL_GetTicks();
+  uint32_t render_delay_ms = 1000 / 120; // 120 FPS
   bool live = (errors == 0) ? true : false;
   // Main loop:
   while (live == true)
   {
-    runtime_ms = SDL_GetTicks();
+    uint32_t runtime_ms = SDL_GetTicks();
     if (unsigned_delta(runtime_ms, time_last_rendered) > render_delay_ms)
     {
       SDL_SetRenderDrawColor(Renderer, 
-                              bg_color.r, 
-                              bg_color.g, 
-                              bg_color.b, 
-                              bg_color.a);
-      SDL_RenderFillRect(Renderer, &background);
+                             Background_color.r, 
+                             Background_color.g, 
+                             Background_color.b, 
+                             Background_color.a);
+      SDL_RenderFillRect(Renderer, &Background);
       SDL_RenderPresent(Renderer);
       time_last_rendered = runtime_ms;
     }
-    // Default events:
+    // Example events:
     SDL_Event Event;
-    while(SDL_PollEvent(&Event))
+    while (SDL_PollEvent(&Event))
     {
-      // Default exit method:
+      // Exit event:
       if (Event.type == SDL_QUIT ||
           (Event.type == SDL_KEYDOWN && Event.key.keysym.sym == SDLK_ESCAPE))
       {
         printf("Exiting...\n");
-        live = 0;
+        live = false;
       }
-      // Default resize behavior:
+      // Resize event:
       else if (Event.type == SDL_WINDOWEVENT && 
                Event.window.event == SDL_WINDOWEVENT_RESIZED)
       {
-        SDL_GetWindowSize(Window, &background.w, &background.h);
+        printf("Resizing SDL window...\n");
+        SDL_GetWindowSize(Window,
+                          &Background.w,
+                          &Background.h);
       }
     }
   }
