@@ -9,7 +9,13 @@ if [[ $OSTYPE == "linux-gnu"* ]]; then
   make -C ./build &&
   echo 'Launching program:' &&
   # To-Do: Create a shortcut in the parent directory.
-  ./build/sdl2-c-template
+  if [[ $1 == '-v' ]]; then
+    echo '[o] Launching program with Valgrind'
+    valgrind ./build/sdl2-c-template > log.txt 2>&1
+  else
+    echo '[o] Launching program:'
+    ./build/sdl2-c-template
+  fi
 # WINDOWS
 elif [[ $OSTYPE == "msys" ]] || [[ $OSTYPE == "win32" ]]; then
   clear
@@ -38,8 +44,14 @@ elif [[ $OSTYPE == "msys" ]] || [[ $OSTYPE == "win32" ]]; then
     $Shortcut = $WshShell.CreateShortcut("sdl2-c-template.lnk")
     $Shortcut.TargetPath = (Resolve-Path "build\sdl2-c-template.exe").Path
     $Shortcut.Save() '
+  # Find a valgrind alternative for windows.
+  # if [[ $1 == '-v' ]]; then 
+    # echo '[o] Launching program with Valgrind'
+    # valgrind ./build/sdl2-c-template.exe > log.txt 2>&1
+  # else
   echo '[o] Launching program:'
   ./build/sdl2-c-template.exe
+  # fi
 # MACOS
 elif [[ $OSTYPE == "darwin"* ]]; then
   clear &&
