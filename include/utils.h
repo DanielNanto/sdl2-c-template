@@ -3,6 +3,6 @@
 
 #include <stdint.h>
 
-extern inline uint32_t unsigned_delta(uint32_t value_a, uint32_t value_b);
+extern uint32_t unsigned_delta(uint32_t value_a, uint32_t value_b);
 
 #endif // SDLCT_UTILS_H
